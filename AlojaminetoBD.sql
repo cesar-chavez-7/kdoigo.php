@@ -39,4 +39,25 @@ CREATE TABLE UsuarioAlojamientos (
     UNIQUE KEY UniqueUsuarioAlojamiento (UsuarioId, AlojamientoId)
 );
 
--- Aqui hirian las insercciones de datos pero como no c como le vamos a hacer asi lo voy a dejar xd
+--usuario Administrador (Rol: 'Administrador')
+-- Contraseña: "admin123"
+INSERT INTO Usuarios (UserName, Email, PasswordHash, Rol)
+VALUES ('admin', 'admin@mail.com', '$2y$10$E/VMkLSOo0y.S2zLwYq4AOlE3cTUj/6pS.Nl3sCVR/LWMpS6gME0O', 'Administrador');
+
+--usuario normal (Rol: 'Usuario')
+--Contraseña: "user123"
+INSERT INTO Usuarios (UserName, Email, PasswordHash, Rol)
+VALUES ('usuario_demo', 'user@mail.com', '$2y$10$A5g1H.gTwc4w5gwg2xJ.X.3NvBfBAlmGzcsdPYiJzHRf6fARsOMle', 'Usuario');
+
+-- Alojamientos (creados por el admin, Id = 1)
+-- Estos son los que aparecerán en la Landing Page
+INSERT INTO Alojamientos (Nombre, Descripcion, Precio, Ubicacion, ImagenUrl, UsuarioCreador)
+VALUES 
+('Cabaña en el Bosque', 'Una hermosa cabaña para escapar de la ciudad.', 120.00, 'Montaña El Pital', 'https://elsalvador.travel/system/wp-content/uploads/2022/12/DestinationPital.jpg', 1),
+('Apartamento de Playa', 'Vistas increíbles al océano.', 250.50, 'Playa El Tunco', 'https://elsalvador.travel/system/wp-content/uploads/2020/01/EL-TUNCO.jpg', 1),
+('Casa Colonial', 'Encanto histórico en el centro de la ciudad.', 90.00, 'Suchitoto', 'https://upload.wikimedia.org/wikipedia/commons/2/21/Casas_de_Suchitoto.jpg', 1);
+
+--Simular que un usuario ya ha seleccionado un alojamiento
+-- El 'usuario_demo' (Id = 2) ha seleccionado la 'Cabaña en el Bosque' (Id = 1)
+INSERT INTO UsuarioAlojamientos (UsuarioId, AlojamientoId)
+VALUES (2, 1);
